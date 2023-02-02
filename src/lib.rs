@@ -101,6 +101,7 @@ pub use crate::bytes_mut::BytesMut;
 #[cfg(feature = "serde")]
 mod serde;
 
+#[cfg(any(feature = "alloc", feature = "std"))]
 #[inline(never)]
 #[cold]
 fn abort() -> ! {

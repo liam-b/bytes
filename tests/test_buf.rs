@@ -57,6 +57,7 @@ fn test_bufs_vec() {
     assert_eq!(1, buf.chunks_vectored(&mut dst[..]));
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn test_vec_deque() {
     use std::collections::VecDeque;
