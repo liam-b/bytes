@@ -1,9 +1,12 @@
 #![warn(rust_2018_idioms)]
 
-use bytes::{Buf, BufMut, Bytes};
+use bytes::{Buf, BufMut};
+#[cfg(feature = "alloc")]
+use bytes::Bytes;
 #[cfg(feature = "std")]
 use std::io::IoSlice;
 
+#[cfg(feature = "alloc")]
 #[test]
 fn collect_two_bufs() {
     let a = Bytes::from(&b"hello"[..]);
@@ -33,6 +36,7 @@ fn writing_chained() {
     }
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn iterating_two_bufs() {
     let a = Bytes::from(&b"hello"[..]);
@@ -42,6 +46,7 @@ fn iterating_two_bufs() {
     assert_eq!(res, &b"helloworld"[..]);
 }
 
+#[cfg(feature = "alloc")]
 #[cfg(feature = "std")]
 #[test]
 fn vectored_read() {
@@ -133,6 +138,7 @@ fn vectored_read() {
     }
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn chain_growing_buffer() {
     let mut buff = [' ' as u8; 10];
@@ -146,6 +152,7 @@ fn chain_growing_buffer() {
     assert_eq!(&vec, b"wassup23123");
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn chain_overflow_remaining_mut() {
     let mut chained = Vec::<u8>::new().chain_mut(Vec::new()).chain_mut(Vec::new());
@@ -155,6 +162,7 @@ fn chain_overflow_remaining_mut() {
     assert_eq!(chained.remaining_mut(), usize::MAX);
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn chain_get_bytes() {
     let mut ab = Bytes::copy_from_slice(b"ab");

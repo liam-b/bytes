@@ -19,7 +19,8 @@ edition = "2018"
 
 [features]
 default = ["std"]
-std = []
+std = ["alloc"]
+alloc = []
 
 [dependencies]
 serde = { version = "1.0.60", optional = true, default-features = false, features = ["alloc"] }
@@ -32,3 +33,6 @@ loom = "0.5"
 
 [package.metadata.docs.rs]
 rustdoc-args = ["--cfg", "docsrs"]
+
+[lib]
+doctest = false

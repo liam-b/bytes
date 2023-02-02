@@ -1,3 +1,5 @@
+#![cfg(feature = "alloc")]
+
 //! Test using `Bytes` with an allocator that hands out "odd" pointers for
 //! vectors (pointers where the LSB is set).
 

@@ -4,6 +4,7 @@ use bytes::Buf;
 #[cfg(feature = "std")]
 use std::io::IoSlice;
 
+#[cfg(feature = "alloc")]
 #[test]
 fn test_fresh_cursor_vec() {
     let mut buf = &b"hello"[..];
@@ -102,6 +103,7 @@ fn test_deref_buf_forwards() {
     assert_eq!(Box::new(Special).get_u8(), b'x');
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn copy_to_bytes_less() {
     let mut buf = &b"hello world"[..];
@@ -111,6 +113,7 @@ fn copy_to_bytes_less() {
     assert_eq!(buf, &b" world"[..])
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 #[should_panic]
 fn copy_to_bytes_overflow() {

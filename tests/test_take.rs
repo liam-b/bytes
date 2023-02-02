@@ -1,6 +1,7 @@
 #![warn(rust_2018_idioms)]
 
 use bytes::buf::Buf;
+#[cfg(feature = "alloc")]
 use bytes::Bytes;
 
 #[test]
@@ -12,6 +13,7 @@ fn long_take() {
     assert_eq!(b"hello world", buf.chunk());
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 fn take_copy_to_bytes() {
     let mut abcd = Bytes::copy_from_slice(b"abcd");
@@ -24,6 +26,7 @@ fn take_copy_to_bytes() {
     assert_eq!(Bytes::copy_from_slice(b"bcd"), abcd);
 }
 
+#[cfg(feature = "alloc")]
 #[test]
 #[should_panic]
 fn take_copy_to_bytes_panics() {

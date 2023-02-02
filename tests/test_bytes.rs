@@ -1,4 +1,5 @@
 #![warn(rust_2018_idioms)]
+#![cfg(feature = "alloc")]
 
 use bytes::{Buf, BufMut, Bytes, BytesMut};
 
@@ -682,7 +683,7 @@ fn stress() {
 
         for _ in 0..THREADS {
             let c = barrier.clone();
-            let buf = buf.clone();
+            let buf = Arc::clone(&buf);
 
             joins.push(thread::spawn(move || {
                 c.wait();
